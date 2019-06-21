@@ -1,23 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
+import { UserSession } from 'blockstack';
+
 import './App.css';
 
-const App: React.FC = () => {
+import { SignedIn } from './SignedIn';
+import { Landing } from './Landing';
+
+interface Props {
+  userSession: UserSession
+}
+const App: React.FC<Props> = ({
+  userSession
+}) => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>Learning Blockstack!</p>
+        {
+          userSession.isUserSignedIn()
+            ? <SignedIn name={'World'}/>
+            : <Landing userSession={userSession}/>
+          }
       </header>
     </div>
   );
