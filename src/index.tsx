@@ -6,6 +6,10 @@ import * as serviceWorker from './serviceWorker';
 
 import { UserSession, AppConfig } from 'blockstack';
 
+import { BrowserRouter } from 'react-router-dom'
+
+
+
 const appConfig = new AppConfig(['store_write', 'publish_data'])
 const userSession = new UserSession({ appConfig });
 
@@ -22,7 +26,11 @@ if (!isUserSignedIn && isSignInPending) {
         })
 }
 
-const app = <App userSession={userSession} />;
+const app = (
+    <BrowserRouter>
+        <App userSession={userSession} />
+    </BrowserRouter>
+)
 
 const $root = document.getElementById('root');
 

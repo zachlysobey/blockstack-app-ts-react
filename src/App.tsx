@@ -1,5 +1,7 @@
-import React from 'react';
-import { UserSession } from 'blockstack';
+import React from 'react'
+import { UserSession } from 'blockstack'
+import { Route } from 'react-router-dom'
+import { PrivateRoute } from './PrivateRoute'
 
 import './App.css';
 
@@ -16,11 +18,15 @@ const App: React.FC<Props> = ({
     <div className="App">
       <header className="App-header">
         <p>Learning Blockstack!</p>
-        {
-          userSession.isUserSignedIn()
-            ? <SignedIn name={'World'}/>
-            : <Landing userSession={userSession}/>
-          }
+        <PrivateRoute
+          userSession={userSession}
+          path="/"
+          component={SignedIn}
+        />
+        <Route
+          path="/landing/"
+          component={Landing}
+        />
       </header>
     </div>
   );
